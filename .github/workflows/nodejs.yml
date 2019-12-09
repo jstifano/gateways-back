@@ -1,4 +1,4 @@
-name: Node CI
+name: Automated Build for Gateways App (Musala Soft)
 
 on: [push]
 
@@ -18,8 +18,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        npm ci
-        npm run build --if-present
-        npm test
+        npm install
+        npm run test
       env:
         CI: true
