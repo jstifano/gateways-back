@@ -33,19 +33,8 @@ const getGatewayById = async (req, res) => {
  */
 const createGateway = async(req, res) => {
     console.log(`Request POST ::: add --> /gateway`);
-    if(!req.body.name || !req.body.ipv4){
-        return res.json(ResponseService.craftErrorResponseObj({}, responseMsg.invalidParams, 400));
-    }
-    else {
-        let validIPV4 = UtilsService.isValidIPV4(req.body.ipv4);
-        if(validIPV4){
-            let response = await GatewayService.add(req.body);
-            return res.json(response); 
-        }
-        else {
-            return res.json(ResponseService.craftErrorResponseObj({}, responseMsg.invalidIPV4, 400));
-        }    
-    }   
+    let response = await GatewayService.add(req.body);
+    return res.json(response);   
 }
 
 module.exports = {

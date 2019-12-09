@@ -23,7 +23,7 @@ server.use(cors());
 const gatewayRoutes = require('./routes/Gateway');
 const deviceRoutes = require('./routes/Device');
 
-// Include the routes inside the server
+// Include the controllers to handle the requests.
 server.use(appConfig.apiEndpoint, gatewayRoutes);
 server.use(appConfig.apiEndpoint, deviceRoutes);
 

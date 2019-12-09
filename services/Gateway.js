@@ -2,6 +2,7 @@
 
 const Gateway = require('../models/Gateway');
 const ResponseService = require('../services/Response');
+const UtilsService = require('../services/Utils');
 const responseMsg = require('../data/response-msg');
 let ObjectId = require('mongoose').Types.ObjectId;
 
@@ -44,16 +45,24 @@ const findOneGatewayById = async (id) => {
 }
 
 const add = async (data) => {
-    let newGateway = await Gateway.create(data);
-    let response = null;
-
-    if(newGateway){
-        response = await ResponseService.craftOkResponseObj(newGateway, responseMsg.newGatewayCreated, 200);
+    if(!data.name || !data.ipv4){
+        return ResponseService.craftErrorResponseObj({}, responseMsg.invalidParams, 400);     
+    }
+    else if(!UtilsService.isValidIPV4(data.ipv4)){
+        return ResponseService.craftErrorResponseObj({}, responseMsg.invalidIPV4, 400);
     }
     else {
-        response = await ResponseService.craftErrorResponseObj({}, responseMsg.gatewayNotCreated, 500);    
+        let newGateway = await Gateway.create(data);
+        let response = null;
+
+        if(newGateway){
+            response = await ResponseService.craftOkResponseObj(newGateway, responseMsg.newGatewayCreated, 200);
+        }
+        else {
+            response = await ResponseService.craftErrorResponseObj({}, responseMsg.gatewayNotCreated, 500);    
+        }
+        return response;
     }
-    return response;
 }
 
 module.exports = {
