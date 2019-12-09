@@ -2,14 +2,24 @@ name: Automated Build for Gateways App (Musala Soft)
 
 on: [push]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+  image: node:latest
 
-    steps:
-    - name: Installing dependencies and running tests
-      run: |
-        npm install
-        npm run test
-      env:
-        CI: true
+  stages:
+    - build
+    - test
+
+  cache:
+    paths:
+      - node_modules/
+
+  install_dependencies:
+    stage: build
+    script:
+      - npm install
+    artifacts:
+      paths:
+        - node_modules/
+
+  testing_testing:
+    stage: test
+    script: npm run test
