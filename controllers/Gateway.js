@@ -16,7 +16,7 @@ const getGateways = async (req, res) => {
 
 /**
  * Controller to get a gateway by ID
- * @param 
+ * @params
  * id ::: Gateway id to find it.
  */
 const getGatewayById = async (req, res) => {
@@ -28,8 +28,8 @@ const getGatewayById = async (req, res) => {
 /**
  * Service to add a new gateway
  * @params
- * name ::: String --> Gateway's name
- * ipv4 ::: String --> Ip associated to the gateway
+ * name ::: Gateway's name.
+ * ipv4 ::: Ip associated to the gateway.
  */
 const createGateway = async(req, res) => {
     console.log(`Request POST ::: add --> /gateway`);

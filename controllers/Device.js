@@ -6,6 +6,10 @@ const responseMsg = require('../data/response-msg');
 
 /**
  * Controller to get all the gateways with devices
+ * @params
+ * vendor ::: Name of the device.
+ * status ::: Device's status (Online or Offline).
+ * gateway_id ::: Gateway id where the device belongs.
  */
 const addDevice = async (req, res) => {
     console.log(`Request POST ::: add /device`);
@@ -20,6 +24,8 @@ const addDevice = async (req, res) => {
 
 /**
  * Controller to get a gateway by IPV4
+ * @param
+ * id ::: Device id to be deleted.
  */
 const deleteDeviceById = async (req, res) => {
     console.log(`Request POST ::: delete --> /device/${req.params.id}`);

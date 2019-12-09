@@ -1,5 +1,5 @@
 /**
- * Main route to access the API services
+ * Config file to use in the whole app
  */
 const config = {
     appConfig: {

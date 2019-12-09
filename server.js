@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { appConfig } = require('./config');
 
-// Allow access to the resquest body.
+// Allow access to the request body.
 server.use(bodyParser.json());
 
 // Allow access to the url params
