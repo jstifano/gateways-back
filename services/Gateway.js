@@ -28,7 +28,7 @@ const getAllGateways = async () => {
 const findOneGatewayById = async (id) => {
     let response = null;
     if(id.length === 12 || id.length === 24){
-        const gateway = await Gateway.findOne({_id: ObjectId(id)}).select('-devices');
+        const gateway = await Gateway.findOne({_id: ObjectId(id)});
 
         if(gateway){
             response = await ResponseService.craftOkResponseObj(gateway, responseMsg.gatewayFound, 200);

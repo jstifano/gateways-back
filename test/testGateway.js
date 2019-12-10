@@ -7,11 +7,11 @@ const Gateway = require('../models/Gateway');
 const GatewayService = require('../services/Gateway');
 const responseMsg = require('../data/response-msg');
 
-describe('Test for Gateway Controller', function() {
+describe('Tests for Gateway Controller:', () => {
     
-    describe('#Crete Gateway Service', function() {
+    describe('POST /gateway', () => {
         
-        it('The gateway is created succesfully.', function() {
+        it('1) The gateway is created succesfully.', () => {
             let newGateway = {
                 name: 'Testing the gateway',
                 ipv4: '191.31.52.67'
@@ -22,7 +22,7 @@ describe('Test for Gateway Controller', function() {
             })
         })
 
-        it('The gateway cannot be created successfully.', function() {
+        it('2) The gateway cannot be created successfully.', () => {
             let newGateway = {
                 name: '',
                 ipv4: '---'
@@ -30,6 +30,17 @@ describe('Test for Gateway Controller', function() {
             GatewayService.add(newGateway)
             .then(response => {
                 assert.equal(response.msg, responseMsg.invalidParams);
+            })
+        });
+
+        it('3) The IPV4 is not valid.', () => {
+            let newGateway = {
+                name: 'Testing bad gateway',
+                ipv4: '0.25.999.54'
+            };
+            GatewayService.add(newGateway)
+            .then(response => {
+                assert.equal(response.msg, responseMsg.invalidIPV4);
             })
         });
     });
