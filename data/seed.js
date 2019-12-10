@@ -1,6 +1,7 @@
 'use-strict';
 
 const Gateway = require('../models/Gateway');
+const Device = require('../models/Device');
 const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 const { appConfig } = require('../config');
@@ -52,7 +53,63 @@ const gateways = [
                 status: 'Offline'
             }
         ] 
-    }
+    },
+    {
+        name: "Full Gateway",
+        ipv4: "200.10.39.33",
+        devices: [
+            {
+                _id: new ObjectID(),
+                vendor: 'a',
+                status: 'Online'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'b',
+                status: 'Offline'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'c',
+                status: 'Online'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'd',
+                status: 'Online'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'e',
+                status: 'Offline'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'f',
+                status: 'Offline'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'g',
+                status: 'Offline'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'h',
+                status: 'Offline'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'i',
+                status: 'Offline'
+            },
+            {
+                _id: new ObjectID(),
+                vendor: 'j',
+                status: 'Offline'
+            }
+        ] 
+    },
 ]
 
 /**
@@ -60,11 +117,26 @@ const gateways = [
  */
 const seed = async () => {
     let client = await mongoose.connect(appConfig.mongoUrl,  {useUnifiedTopology: true, useNewUrlParser: true });
+    console.log("Seeding gateways ...");    
     let result = await Gateway.insertMany(gateways);
-    if(result){
-        console.log("DB Seeded successfully!");
+
+    let finished = result.map( async (elm, idGateway) => {
+        elm.devices.map( async (device, idDevice) => {
+            let gateway = {
+                name: elm.name,
+                ipv4: elm.ipv4,    
+            }
+            device.gateway = gateway;
+            let deviceCreated = await Device.create(device);
+            return deviceCreated;
+        })
+        return elm;
+    })
+
+    setTimeout(() => {
+        console.log("DB Successfully seeded.");
         process.exit();
-    }
+    }, 9000);
 }
 
 seed();
