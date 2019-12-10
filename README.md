@@ -16,12 +16,12 @@
 
 ## API Services
 
-    *GET /gateways* --> Get all gateways from the DB with their devices.
-    *GET /gateway/:id* --> Find one specific gateway by its ID.
-    *POST /gateway* --> Create a new gateway.
+    **GET /gateways** --> Get all gateways from the DB with their devices.
+    **GET /gateway/:id** --> Find one specific gateway by its ID.
+    **POST /gateway** --> Create a new gateway.
 
-    *POST /device* --> Create a new device associated with a gateway.
-    *DELETE /device/:id* --> Delete a device from a gateway.
+    **POST /device** --> Create a new device associated with a gateway.
+    **DELETE /device/:id** --> Delete a device from a gateway.
 
 ## Unit Tests
 
