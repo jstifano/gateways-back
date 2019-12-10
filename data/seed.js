@@ -117,12 +117,13 @@ const gateways = [
  */
 const seed = async () => {
     let client = await mongoose.connect(appConfig.mongoUrl,  {useUnifiedTopology: true, useNewUrlParser: true });
-    console.log("Seeding gateways ...");    
+    console.log("Seeding ...");    
     let result = await Gateway.insertMany(gateways);
 
-    let finished = result.map( async (elm, idGateway) => {
+    result.map( async (elm, idGateway) => {
         elm.devices.map( async (device, idDevice) => {
             let gateway = {
+                _id: elm._id,
                 name: elm.name,
                 ipv4: elm.ipv4,    
             }
