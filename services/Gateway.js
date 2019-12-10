@@ -34,7 +34,7 @@ const findOneGatewayById = async (id) => {
             response = await ResponseService.craftOkResponseObj(gateway, responseMsg.gatewayFound, 200);
         }
         else {
-            response = await ResponseService.craftErrorResponseObj(gateway, responseMsg.noGatewayFound, 400);    
+            response = await ResponseService.craftErrorResponseObj({}, responseMsg.noGatewayFound, 202);    
         }
         return response;
     }
