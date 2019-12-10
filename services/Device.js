@@ -42,13 +42,22 @@ const add = async (data) => {
  */
 const deleteDevice = async (id) => {
     let response = null;
-    const gateway = await Device.deleteOne({_id: ObjectId(id)});
+    const device = await Device.findOne({_id: ObjectId(id)});
+    const deletedDevice = await Device.deleteOne({_id: ObjectId(id)});
+    await Gateway.updateOne(
+        { _id: ObjectId(device.gateway._id) }, 
+        { $pull: { 
+            devices: { 
+                _id: ObjectId(device._id)
+            } 
+        } 
+    });
 
-    if(gateway){
-        response = await ResponseService.craftOkResponseObj(gateway, responseMsg.gatewayDeleted, 200);
+    if(device){
+        response = await ResponseService.craftOkResponseObj(device, responseMsg.gatewayDeleted, 200);
     }
     else {
-        response = await ResponseService.craftErrorResponseObj(gateway, responseMsg.noGatewayFound, 400);    
+        response = await ResponseService.craftErrorResponseObj(device, responseMsg.noGatewayFound, 400);    
     }
     return response;
 }
