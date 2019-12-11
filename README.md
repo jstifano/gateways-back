@@ -6,6 +6,8 @@
     2. Seed the database by running the script npm run seed-db
     3. Lift the server with npm run start
     4. The server will be running on https://localhost:5000.
+    
+    NOTE: You can import the Postman collection located in /data/postman and test the services created.
 
 ## Services description
 
