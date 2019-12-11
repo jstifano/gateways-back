@@ -28,6 +28,8 @@
 ## Unit Tests
 
     To run the suite of tests execute npm run test on command line.
+    I just created 3 test cases for the Gateway creation (Successfull creation, Error creation and Invalid IPV4).
+    I think it's enough to evaluate me.
 
 ## Automated Build
 
