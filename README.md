@@ -33,4 +33,6 @@
 
     The automated build is located on /.github/workflows folder, there you'll find the nodejs.yml file
     where all the steps to make the build job are described.
+    
+    You can check the job working on "Action" tab inside the github repo.
 
