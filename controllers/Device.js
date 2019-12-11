@@ -5,7 +5,7 @@ const UtilsService = require('../services/Utils');
 const responseMsg = require('../data/response-msg');
 
 /**
- * Controller to get all the gateways with devices
+ * Controller to add a new device
  * @params
  * vendor ::: Name of the device.
  * status ::: Device's status (Online or Offline).
@@ -23,7 +23,7 @@ const addDevice = async (req, res) => {
 }
 
 /**
- * Controller to get a gateway by IPV4
+ * Controller to delete a device by its ID.
  * @param
  * id ::: Device id to be deleted.
  */
